@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
 int main(){
 
 string text;
@@ -17,23 +16,15 @@ cin >> szyfr;
 int dl = text.length();
 
 switch(szyfr){
-
-
 case 1:
 	int przesuniecie;
 	cout << "ille chesz przesunąć? (MAX. 26)\n";
         cin >> przesuniecie;
-		for(int i=0; i < dl; i++)
-		{
+		for(int i=0; i < dl; i++){
 			for(int j=1; j < przesuniecie; j++){
 				if(text[i] == ' ') continue;
 				else if(text[i] == 'z'){
 					text[i] == 'a';
-					przesuniecie--;
-					powrot = true;
-				}
-				else if(text[i] == 'Z'){
-					text[i] == 'A';
 					przesuniecie--;
 					powrot = true;
 				}
@@ -50,15 +41,13 @@ case 1:
 	break;
 	
 case 2:
-		for (int i = 0; i < dl - 1; i += 2)
-		{
+		for (int i = 0; i < dl - 1; i += 2){
 			char znak;
 			znak = text[i];
 			text[i] = text[i + 1];
 			text[i + 1] = znak;
 		}
 		cout << "Zaszyfrowany tekst kodem przestawieniowym: \n" << text << "/n";
-	//}
 	break;
 		
 case 3:
@@ -70,11 +59,6 @@ case 3:
 			przesuniecie--;
 			powrot = true;
 		}
-		else if(text[i] == 'Z'){
-			text[i] == 'A';
-			przesuniecie--;
-			powrot = true;
-		}
 		else{
 			text[i]++;
 		}
@@ -83,8 +67,7 @@ case 3:
 			powrot = false;
 		}
 		}
-		for (int i = 0; i < dl - 1; i += 2)
-		{	
+		for (int i = 0; i < dl - 1; i += 2){	
 			char znak;
 			znak = text[i];
 			text[i] = text[i + 1];
@@ -95,25 +78,31 @@ case 3:
 	break;
 
 case 4:
-	char znak;
-		cout << "O ile przesunac: ";
-		cin >> szyfr;
-	if (szyfr <= 0 || szyfr > 26)
-	{
-		cout << "Niepoprawna liczba\n";
-	}
-	for (int j = 0; j < dl; j++){
-		znak = text[j];
-		if (znak >= 'a' && znak <= 'z')
-		{
-		znak = ((znak - 'a' + (26 - szyfr)) % 26) + 'a';
-		  }
-		text[j] = znak;
+	bool powrot = false;
+	for(int x = 1; x < 26; x++){
+		for(int i = 0; i < dl; i++){
+			for(int j=1; j < x; j++){
+				
+				if(text[i] == ' ') continue;
+				else if(text[i] == 'a'){
+					text[i] == 'z';
+					x--;
+					powrot = true;
+				}
+				else text[i]--;
+				
+				if(powrot){
+				x++;
+				powrot = false;
+				}
+			}
 		}
-		cout << "Odszyfrowany tekst kodem cezara\n" << text << "\n";
-	break;
-	deafult:
-	cout << "niepoprawny wybór";
-	}
-		
+	cout << text << "\n";
 }
+break;
+deafult:
+cout << "wybór nie istnieje\n";
+break;
+}
+}
+
